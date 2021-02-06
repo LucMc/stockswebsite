@@ -61,7 +61,7 @@ def generate_SPY_dataframe(start):
 
 def graph():
     # Variables
-    strats = ['RSI', 'MACD', 'MACDRSI']
+    strats = ['MACD', 'RSI', 'MACDRSI']
     year = dt.datetime(2000, 1, 1)
 
     # Generate dataframe
@@ -84,17 +84,19 @@ def graph():
 
         # Plot strategies
         fig = visualise(df, ticks=strats) # ticks for which strategy
-        cumulative_returns(df, strats=strats)
-        # visualise_returns(df, strats=strats)
-        print_statistics(df)
-        prepare_df(df)
-        do_ml(df)
-        year = increment_year(year)
+        # cumulative_returns(df, strats=strats)
+        # fig2 = visualise_returns(df, strats=strats)
+        # print_statistics(df)
+        # prepare_df(df)
+        # do_ml(df)
+        # year = increment_year(year)
+        # plt.show()
+        #
         return fig
 
 
 if __name__ == '__main__':
-    main()
+    graph()
 
 
 '''

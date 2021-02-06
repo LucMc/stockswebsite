@@ -1,13 +1,30 @@
 {% extends "main/base.html" %}
 {% block content %}
-<head></head>
+<head>
+
+ <style>
+  @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: #d6d6d6;
+    background: #15191c;
+  }
+</style>
+
+
+</head>
 
 <body>
 <h1>Hello There</h1>
-</body>
- {% autoescape off %}
+ <div id="content" width="50px">
+  {% autoescape off %}
 
-{{graph}}
- {% endautoescape %}
+  {{graph}}
+  {% endautoescape %}
+ </div>
+</body>
+
 
 {% endblock %}
