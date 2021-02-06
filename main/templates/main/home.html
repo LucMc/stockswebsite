@@ -11,19 +11,32 @@
     color: #d6d6d6;
     background: #15191c;
   }
+
+  .content {
+    width: 80%;
+    height: 10%;
+  }
 </style>
 
 
 </head>
 
 <body>
-<h1>Hello There</h1>
- <div id="content" width="50px">
+<h1>Stock Analysis</h1>
+
+
+ <table class="content">
+  <th>
   {% autoescape off %}
 
-  {{graph}}
+   {{returns}}
+      {{graph}}
+
+
   {% endautoescape %}
- </div>
+  </th>
+
+ </table>
 </body>
 
 

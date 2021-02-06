@@ -19,8 +19,10 @@ def homepage(request):
     return render(request, 'main/home.html')
 
 def stock_plot(request):
-    fig = graph() # make this stock figure
-    f = open("main/graphs/graph.html", 'r').read()
+    graph() # make this stock figure
+    fig1 = open("main/graphs/graph.html", 'r').read()
+    fig2 = open("main/graphs/returns.html", 'r').read()
+
     # fig = file_html(fig, CDN, "stock")
-    return render(request, 'main/home.html', context={'graph': f})
+    return render(request, 'main/home.html', context={'graph': fig1, 'returns':fig2})
 

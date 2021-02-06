@@ -5,6 +5,9 @@ from random import choice
 from bokeh.plotting import figure, output_file, show, save
 from bokeh.embed import file_html
 from bokeh.resources import CDN
+from bokeh.palettes import Dark2_5 as palette
+
+import itertools
 
 from bokeh.themes import built_in_themes
 from bokeh.io import curdoc
@@ -22,7 +25,7 @@ def visualise(df, ticks=[]):
     in main
     '''
     # df = df.head()
-    colours = ['green', 'red', 'purple', 'yellow', 'white', 'pink', 'orange', 'cyan']
+    colours = itertools.cycle(palette)
     curdoc().theme = 'dark_minimal'
     output_file('graph.html')
 
@@ -33,17 +36,14 @@ def visualise(df, ticks=[]):
         title='IBM Stock Analytics',
         x_axis_label='X Axis',
         y_axis_label='Y Axis',
-        sizing_mode='scale_width'
+        sizing_mode='scale_width',
+        height=200
     )
 
 
     # ax.title.set_text('IBM Adjusted Close')
-
-    for tick in ticks:
-        buy_colour = choice(colours)
-        colours.remove(buy_colour)
-        sell_colour = choice(colours)
-        colours.remove(sell_colour)
+    # Make this so it isnt random?
+    for tick, buy_colour, sell_colour in zip(ticks, colours, colours):
 
         buys = np.where(df[f'{tick} (buy/sell)'] > 0, np.nan, df[f'{tick} (buy/sell)']).__neg__()
         sells = np.where(df[f'{tick} (buy/sell)'] < 0, np.nan, df[f'{tick} (buy/sell)'])
@@ -57,15 +57,32 @@ def visualise(df, ticks=[]):
     # ax.set_ylabel('Adj Close Price USD ($)')
     # ax.legend(loc='best')
     # show(p)
-    save(p, filename="main/graphs/graph.html")
+    save(p, filename="main/graphs/returns.html")
     return p
 
 def visualise_returns(df, strats=[]):
+    output_file('graph.html')
+
+    p = figure(
+        title='Cumulative Returns',
+        x_axis_label='X Axis',
+        y_axis_label='Y Axis',
+        sizing_mode='scale_width',
+        height=200
+    )
+
     df['delta Adj Close'] = df['Adj Close'] - df['Adj Close'][0]
     l = [f'{s} cumulative return' for s in strats]
     l.append('delta Adj Close')
-    df[l].plot(cmap='RdGy', title='Cumulative Return ($)', legend='best')
+
+    cm = itertools.cycle(palette)
+
+    for col, colour in zip(l, cm):
+        p.line(df.index, df[col], color=colour, legend_label=col)
+    # df[l].plot(cmap='RdGy', title='Cumulative Return ($)', legend='best')
     # plt.show()
+    save(p, filename="main/graphs/graph.html")
+    return p
 
 '''
     # 2 - Graph of MACD indicator

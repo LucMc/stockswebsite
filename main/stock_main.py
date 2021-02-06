@@ -83,16 +83,17 @@ def graph():
 
 
         # Plot strategies
-        fig = visualise(df, ticks=strats) # ticks for which strategy
-        # cumulative_returns(df, strats=strats)
-        # fig2 = visualise_returns(df, strats=strats)
+        fig1 = visualise(df, ticks=strats) # ticks for which strategy
+        cumulative_returns(df, strats=strats)
+        print(df)
+        fig2 = visualise_returns(df, strats=strats) # change to fig2 once working
         # print_statistics(df)
         # prepare_df(df)
         # do_ml(df)
         # year = increment_year(year)
         # plt.show()
         #
-        return fig
+        return fig1, fig2
 
 
 if __name__ == '__main__':
