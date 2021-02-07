@@ -1,18 +1,11 @@
-import matplotlib.pyplot as plt
-from matplotlib import style
 import numpy as np
-from random import choice
-from bokeh.plotting import figure, output_file, show, save
-from bokeh.embed import file_html
-from bokeh.resources import CDN
+from bokeh.plotting import figure, output_file, save
 from bokeh.palettes import Dark2_5 as palette
 
 import itertools
 
 from bokeh.themes import built_in_themes
 from bokeh.io import curdoc
-
-style.use('dark_background')
 
 def percent_return(df, col):
     percent_return = (np.sum(df[f'{col} (buy/sell)']) / df['Adj Close'][0]) * 100

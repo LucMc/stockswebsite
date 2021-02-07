@@ -1,16 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import matplotlib.pyplot as plt
-import mpld3
 from .stock_main import *
-from bokeh.client import push_session
-from threading import Thread
-from bokeh.server.server import Server
-from bokeh.embed import server_document
-from tornado.ioloop import IOLoop
-# from strategy_comparison_local.Stocks.analytics.main import graph
-from bokeh.embed import components
-from bokeh.resources import CDN
+
 
 
 
