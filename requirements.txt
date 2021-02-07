@@ -1,31 +1,24 @@
 
-bokeh @ file:///C:/ci/bokeh_1603297934731/work
+bokeh==2.2.3
 
 django-heroku==0.3.1
 
 
-matplotlib @ file:///C:/ci/matplotlib-base_1592837548929/work
+matplotlib==3.2.2
 mpl-finance==0.10.1
 
 numpy==1.18.5
-numpydoc @ file:///tmp/build/80754af9/numpydoc_1594166760263/work
 
-pandas @ file:///C:/ci/pandas_1592833613419/work
+pandas==1.0.5
 pandas-datareader==0.9.0
 pandocfilters==1.4.2
 
 python-dateutil==2.8.1
-python-jsonrpc-server @ file:///tmp/build/80754af9/python-jsonrpc-server_1594397536060/work
-python-language-server @ file:///C:/ci/python-language-server_1594162130238/work
-pythonnet @ file:///D:/bld/pythonnet_1605354789979/work
 
 ruamel-yaml==0.15.87
 scikit-image==0.16.2
-scikit-learn @ file:///C:/ci/scikit-learn_1592853510272/work
-scipy @ file:///C:/ci/scipy_1592916963468/work
-
-
-sympy @ file:///C:/ci/sympy_1594234545115/work
+scikit-learn==0.23.1
+scipy==1.5.0
 
 
 sklearn==0.23.1
