@@ -27,10 +27,11 @@ def visualise(df, ticks=[]):
     # signal = df['Signal Line']
     p = figure(
         title='IBM Stock Analytics',
-        x_axis_label='X Axis',
-        y_axis_label='Y Axis',
+        x_axis_label='Time (Days)',
+        y_axis_label='Price ($)',
         sizing_mode='scale_width',
-        height=200
+        height=200,
+        height_policy='max'
     )
 
 
@@ -46,22 +47,24 @@ def visualise(df, ticks=[]):
 
     # 1 - Graph of Adj Close price
     p.line(df.index, df['Adj Close'], alpha=0.35)
-    # plt.xlabel('Date')
-    # ax.set_ylabel('Adj Close Price USD ($)')
-    # ax.legend(loc='best')
-    # show(p)
-    save(p, filename="main/graphs/returns.html")
+
+    p.legend.location = "bottom_left"
+    p.legend.click_policy = "hide"
+
+    save(p, filename="main/graphs/graph.html")
     return p
 
 def visualise_returns(df, strats=[]):
-    output_file('graph.html')
+    output_file('returns.html')
 
     p = figure(
         title='Cumulative Returns',
-        x_axis_label='X Axis',
-        y_axis_label='Y Axis',
+        x_axis_label='Time (days)',
+        y_axis_label='Return ($)',
         sizing_mode='scale_width',
-        height=200
+        height=200,
+        height_policy='max'
+
     )
 
     df['delta Adj Close'] = df['Adj Close'] - df['Adj Close'][0]
@@ -71,10 +74,15 @@ def visualise_returns(df, strats=[]):
     cm = itertools.cycle(palette)
 
     for col, colour in zip(l, cm):
-        p.line(df.index, df[col], color=colour, legend_label=col)
-    # df[l].plot(cmap='RdGy', title='Cumulative Return ($)', legend='best')
-    # plt.show()
-    save(p, filename="main/graphs/graph.html")
+        if col == 'delta Adj Close':
+            p.line(df.index, df[col], color=colour, legend_label=col, alpha=0.8)
+        else:
+            p.line(df.index, df[col], color=colour, legend_label=col, line_width=4, alpha=0.8)
+
+    p.legend.location = "bottom_left"
+    p.legend.click_policy = "hide"
+
+    save(p, filename="main/graphs/returns.html")
     return p
 
 '''
