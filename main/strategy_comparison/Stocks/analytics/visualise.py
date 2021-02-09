@@ -1,6 +1,9 @@
 import numpy as np
 from bokeh.plotting import figure, output_file, save
 from bokeh.palettes import Dark2_5 as palette
+from bokeh.palettes import Spectral6 as buy_palette
+from bokeh.palettes import Plasma6 as sell_palette
+
 
 import itertools
 
@@ -18,7 +21,9 @@ def visualise(df, ticks=[]):
     in main
     '''
     # df = df.head()
-    colours = itertools.cycle(palette)
+    b_colours = itertools.cycle(buy_palette)
+    s_colours = itertools.cycle(sell_palette)
+
     curdoc().theme = 'dark_minimal'
     output_file('graph.html')
 
@@ -37,7 +42,7 @@ def visualise(df, ticks=[]):
 
     # ax.title.set_text('IBM Adjusted Close')
     # Make this so it isnt random?
-    for tick, buy_colour, sell_colour in zip(ticks, colours, colours):
+    for tick, buy_colour, sell_colour in zip(ticks, b_colours, s_colours):
 
         buys = np.where(df[f'{tick} (buy/sell)'] > 0, np.nan, df[f'{tick} (buy/sell)']).__neg__()
         sells = np.where(df[f'{tick} (buy/sell)'] < 0, np.nan, df[f'{tick} (buy/sell)'])
