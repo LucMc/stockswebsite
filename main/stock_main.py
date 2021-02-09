@@ -84,7 +84,7 @@ def graph(year):
     # Plot strategies
     visualise(df, ticks=strats) # ticks for which strategy
     cumulative_returns(df, strats=strats)
-    print(df)
+    # print(df[['MACD (buy/sell)', 'MACD cumulative return']])
     visualise_returns(df, strats=strats) # change to fig2 once working
     visualise_MACD(df)
     visualise_RSI(df)

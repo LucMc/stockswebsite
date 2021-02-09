@@ -60,7 +60,7 @@ def cumulative_returns(df, strats=[]):
             if data[i] < 0:
                 current_trade = data[i]
             elif data[i] > 0:
-                cumulative_return = data[i] + current_trade
+                cumulative_return += data[i] + current_trade
 
             df.at[data.index[i], f'{s} cumulative return'] = cumulative_return
 
