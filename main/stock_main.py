@@ -59,41 +59,41 @@ def generate_SPY_dataframe(start):
     df = web.DataReader('IBM', 'yahoo', start, end)
     return df
 
-def graph():
+def graph(year):
     # Variables
     strats = ['MACD', 'RSI', 'MACDRSI']
-    year = dt.datetime(2000, 1, 1)
+    year = dt.datetime(year, 1, 1)
 
     # Generate dataframe
-    for _ in range(10):
-        df = generate_SPY_dataframe(year)
+    df = generate_SPY_dataframe(year)
 
-        # Drop columns not in use
-        df.drop(['Open', 'High', 'Low', 'Close', 'Volume'], axis=1, inplace=True)
+    # Drop columns not in use
+    df.drop(['Open', 'High', 'Low', 'Close', 'Volume'], axis=1, inplace=True)
 
-        # Non Machine Learning
-        df = MACD(df)
-        df = RSI(df)
-        df = MACDRSI(df)
-        # print(df)
+    # Non Machine Learning
+    df = MACD(df)
+    df = RSI(df)
+    df = MACDRSI(df)
+    # print(df)
 
-        # Machine Learning
-        # Remove unwanted labels before machine learning
-        # df = machine_learning(df)
+    # Machine Learning
+    # Remove unwanted labels before machine learning
+    # df = machine_learning(df)
 
 
-        # Plot strategies
-        fig1 = visualise(df, ticks=strats) # ticks for which strategy
-        cumulative_returns(df, strats=strats)
-        print(df)
-        fig2 = visualise_returns(df, strats=strats) # change to fig2 once working
-        # print_statistics(df)
-        # prepare_df(df)
-        # do_ml(df)
-        # year = increment_year(year)
-        # plt.show()
-        #
-        return fig1, fig2
+    # Plot strategies
+    visualise(df, ticks=strats) # ticks for which strategy
+    cumulative_returns(df, strats=strats)
+    print(df)
+    visualise_returns(df, strats=strats) # change to fig2 once working
+    visualise_MACD(df)
+    visualise_RSI(df)
+    # print_statistics(df)
+    # prepare_df(df)
+    # do_ml(df)
+    # year = increment_year(year)
+    # plt.show()
+    #
 
 
 if __name__ == '__main__':

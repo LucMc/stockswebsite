@@ -85,6 +85,46 @@ def visualise_returns(df, strats=[]):
     save(p, filename="main/graphs/returns.html")
     return p
 
+def visualise_MACD(df):
+    output_file('MACD.html') # is this needed?
+
+    MACD = df['MACD Line']
+    signal = df['Signal Line']
+
+    p = figure(
+        title='MACD',
+        x_axis_label='Time (Days)',
+        y_axis_label='Signal',
+        sizing_mode='scale_width',
+        height=200,
+        height_policy='max'
+    )
+
+    p.line(df.index, MACD, legend_label='MACD Line', color='red', line_width=2)
+    p.line(df.index, signal, legend_label='Signal Line', color='blue', line_width=2)
+
+    save(p, filename="main/graphs/MACD.html")
+    return p
+
+def visualise_RSI(df):
+    output_file('RSI.html') # is this needed?
+
+    p = figure(
+        title='RSI',
+        x_axis_label='Time (Days)',
+        y_axis_label='RSI',
+        sizing_mode='scale_width',
+        height=200,
+        height_policy='max'
+    )
+    # ax3.set_ylim(0,100)
+    p.line(df.index, [30]*len(df.index), color='azure', line_dash='dashed')
+    p.line(df.index, [70]*len(df.index), color='azure', line_dash='dashed')
+
+    p.line(df.index, df['RSI'], legend_label='RSI', color='mediumpurple')
+
+    save(p, filename="main/graphs/RSI.html")
+    return p
 '''
     # 2 - Graph of MACD indicator
     ax2.plot(df.index, MACD, label='MACD Line', color='red', linewidth=2)

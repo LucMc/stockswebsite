@@ -9,10 +9,18 @@ def homepage(request):
     return render(request, 'main/home.html')
 
 def stock_plot(request):
-    graph() # make this stock figure
-    fig1 = open("main/graphs/returns.html", 'r').read()
-    fig2 = open("main/graphs/graph.html", 'r').read()
+    try:
+        graph(int(request.POST['year'])) # make this stock figure
+    except Exception as e:
+        graph(2000) # make this stock figure
 
-    # fig = file_html(fig, CDN, "stock")
-    return render(request, 'main/home.html', context={'graph': fig1, 'returns':fig2})
+    graph_fig = open("main/graphs/returns.html", 'r').read()
+    returns_fig = open("main/graphs/graph.html", 'r').read()
+
+    MACD_fig = open("main/graphs/MACD.html", 'r').read()
+    RSI_fig = open("main/graphs/RSI.html", 'r').read()
+
+    return render(request, 'main/home.html', context={'graph': graph_fig, 'returns':returns_fig,
+                                                      'MACD':MACD_fig, 'RSI':RSI_fig
+                                                       })
 
