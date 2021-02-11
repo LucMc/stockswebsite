@@ -14,8 +14,8 @@ def stock_plot(request):
     except Exception as e:
         graph(2000) # make this stock figure
 
-    graph_fig = open("main/graphs/returns.html", 'r').read()
-    returns_fig = open("main/graphs/graph.html", 'r').read()
+    graph_fig = open("main/graphs/graph.html", 'r').read()
+    returns_fig = open("main/graphs/returns.html", 'r').read()
 
     MACD_fig = open("main/graphs/MACD.html", 'r').read()
     RSI_fig = open("main/graphs/RSI.html", 'r').read()

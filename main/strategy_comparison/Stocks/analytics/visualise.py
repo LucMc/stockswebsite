@@ -1,12 +1,9 @@
 import numpy as np
+import itertools
 from bokeh.plotting import figure, output_file, save
 from bokeh.palettes import Dark2_5 as palette
-from bokeh.palettes import Spectral6 as buy_palette
-from bokeh.palettes import Plasma6 as sell_palette
-
-
-import itertools
-
+from bokeh.palettes import YlGn3 as buy_palette
+from bokeh.palettes import YlOrRd4 as sell_palette
 from bokeh.themes import built_in_themes
 from bokeh.io import curdoc
 

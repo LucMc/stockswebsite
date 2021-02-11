@@ -37,13 +37,14 @@
   </form>
 
 <!-- SWITCHES-->
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="showGraphs();">
-    <script>
+<div class="form-check form-switch" align="left">
+  <input class="form-check-input graphswitch" type="checkbox" id="graphcheckbox" checked /> graph<br>
+  <input class="form-check-input graphswitch" type="checkbox" id="returnscheckbox" checked/>returns<br>
+  <input class="form-check-input graphswitch" type="checkbox" id="MACDcheckbox" />MACD<br>
+  <input class="form-check-input graphswitch" type="checkbox" id="RSIcheckbox" />RSI<br>
 
 
-    </script>
-  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault"></label>
 </div>
 
 <!-- GRAPHS -->
@@ -51,10 +52,18 @@
   <th>
   {% autoescape off %}
 
-   {{returns}}
+      <div id="graph">
       {{graph}}
+      </div>
+      <div id="returns">
+      {{returns}}
+      </div>
+      <div id="MACD">
       {{MACD}}
+      </div>
+      <div id="RSI">
       {{RSI}}
+      </div>
 
 
   {% endautoescape %}
