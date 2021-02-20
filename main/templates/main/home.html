@@ -45,7 +45,12 @@
     <select id="year" name="year" value="2001">
         <script>
             for (var i = 2000; i <= 2021; i++){
-                document.write('<option value="'+i+'">'+i+'</option>');
+                if (i == getQueryVariable("year")){
+                    document.write('<option value="'+i+'" selected>'+i+'</option>');
+                    }
+                else {
+                    document.write('<option value="'+i+'">'+i+'</option>');
+                }
             }
         </script>
     </select>
