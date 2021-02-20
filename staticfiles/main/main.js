@@ -1,5 +1,5 @@
         $(document).ready(function(){
-        graphs = ["MACD", "RSI", "graph", "returns"]
+        graphs = ["MACD", "RSI", "graph", "returns", "ARIMA"]
         giveSwitchesOnclick(graphs);
 
         graphs.forEach(graph => {

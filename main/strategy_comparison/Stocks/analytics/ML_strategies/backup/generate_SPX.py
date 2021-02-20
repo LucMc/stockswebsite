@@ -35,7 +35,7 @@ def get_data_from_yahoo(reload_sp500=False):
         with open("spxtickers.pickle", "rb") as f:
             tickers = pickle.load(f)
 
-    if not os.path.exists('../SPX_tickers'):
+    if not os.path.exists('../../SPX_tickers'):
         os.makedirs('../SPX_tickers')
 
     start = dt.datetime(2000, 1, 1) # Update this

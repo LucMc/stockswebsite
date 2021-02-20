@@ -17,16 +17,32 @@
     height: 10%;
   }
 </style>
+<script>
+    function getQueryVariable(variable)
+{
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++)
+  {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable)
+    {
+      return pair[1];
+    }
+  }
+  return -1; //not found
+}
 
+
+</script>
 </head>
 
 <body>
 <h1>Stock Analysis</h1>
 
-  <form action="/plot"  method="post" >
-   {% csrf_token %}
+  <form action="/plot"  method="get" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <select id="year" name="year">
+    <select id="year" name="year" value="2001">
         <script>
             for (var i = 2000; i <= 2021; i++){
                 document.write('<option value="'+i+'">'+i+'</option>');
@@ -34,7 +50,6 @@
         </script>
     </select>
   <input type="submit"value="Show"/>
-  </form>
 
 <!-- SWITCHES-->
 <div class="form-check form-switch" align="left">
@@ -42,7 +57,7 @@
   <input class="form-check-input graphswitch" type="checkbox" id="returnscheckbox" checked/>returns<br>
   <input class="form-check-input graphswitch" type="checkbox" id="MACDcheckbox" />MACD<br>
   <input class="form-check-input graphswitch" type="checkbox" id="RSIcheckbox" />RSI<br>
-
+  <input class="form-check-input graphswitch" type="checkbox" id="ARIMAcheckbox" />ARIMA<br>
 
   <label class="form-check-label" for="flexSwitchCheckDefault"></label>
 </div>
@@ -57,6 +72,15 @@
       </div>
       <div id="returns">
       {{returns}}
+      </div>
+      <div id="ARIMA">
+      {{ARIMA}}
+
+         <input type="range" min="1" max="238" value="237" id="date" name="date">
+
+         <input type="submit"value="Show"/>
+       </form>
+
       </div>
       <div id="MACD">
       {{MACD}}

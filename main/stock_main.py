@@ -30,7 +30,7 @@ from .strategy_comparison.Stocks.analytics.non_ML_strategies.RSI import RSI
 from .strategy_comparison.Stocks.analytics.non_ML_strategies.MACDRSI import MACDRSI
 # from machine_learning import machine_learning
 from .strategy_comparison.Stocks.analytics.ML_strategies.SVM import *
-
+from .strategy_comparison.Stocks.analytics.ML_strategies.ARIMA import *
 from .strategy_comparison.Stocks.analytics.strategy_statistics import *
 from .strategy_comparison.Stocks.analytics.visualise import *
 
@@ -46,6 +46,12 @@ def increment_year(end):
         start = end.replace(year=end.year + 1, day=end.day-1)
     return start
 
+def decrement_year(end):
+    try:
+        start = end.replace(year=end.year - 1) # Leap year might cause issues
+    except ValueError:
+        start = end.replace(year=end.year - 1, day=end.day-1)
+    return start
 
 def generate_SPY_dataframe(start):
     '''
@@ -59,7 +65,7 @@ def generate_SPY_dataframe(start):
     df = web.DataReader('IBM', 'yahoo', start, end)
     return df
 
-def graph(year):
+def graph(year, date=238):
     # Variables
     strats = ['MACD', 'RSI', 'MACDRSI']
     year = dt.datetime(year, 1, 1)
@@ -79,7 +85,10 @@ def graph(year):
     # Machine Learning
     # Remove unwanted labels before machine learning
     # df = machine_learning(df)
-
+    train = pd.concat([generate_SPY_dataframe(decrement_year(decrement_year(year))),
+                       (generate_SPY_dataframe(decrement_year(year)))]).copy()
+    test = df.copy()
+    test_arima(train, test, df, date=date)
 
     # Plot strategies
     visualise(df, ticks=strats) # ticks for which strategy
