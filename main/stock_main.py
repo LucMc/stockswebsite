@@ -85,8 +85,12 @@ def graph(year, date=238):
     # Machine Learning
     # Remove unwanted labels before machine learning
     # df = machine_learning(df)
-    train = pd.concat([generate_SPY_dataframe(decrement_year(decrement_year(year))),
-                       (generate_SPY_dataframe(decrement_year(year)))]).copy()
+
+    # Reduce training data for now
+    # train = pd.concat([generate_SPY_dataframe(decrement_year(decrement_year(year))),
+    #                    (generate_SPY_dataframe(decrement_year(year)))]).copy()
+
+    train = generate_SPY_dataframe(decrement_year(year)).copy()
     test = df.copy()
     test_arima(train, test, df, date=date)
 
