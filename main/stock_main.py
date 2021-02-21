@@ -92,7 +92,7 @@ def graph(year, date=238):
 
     train = generate_SPY_dataframe(decrement_year(year)).copy()
     test = df.copy()
-    test_arima(train, test, df, date=date)
+    # test_arima(train, test, df, date=date)
 
     # Plot strategies
     visualise(df, ticks=strats) # ticks for which strategy
