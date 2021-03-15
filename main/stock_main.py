@@ -34,6 +34,11 @@ from .strategy_comparison.Stocks.analytics.ML_strategies.ARIMA import *
 from .strategy_comparison.Stocks.analytics.strategy_statistics import *
 from .strategy_comparison.Stocks.analytics.visualise import *
 
+from .strategy_comparison.Stocks.analytics.ML_strategies.SVR import *
+from .strategy_comparison.Stocks.analytics.ML_strategies.NN import *
+
+
+
 pd.set_option('display.max_columns', None)  # Helps for printing columns
 # pd.set_option('display.max_rows', None)  # Helps for printing rows
 '''
@@ -92,7 +97,11 @@ def graph(year, date=238):
 
     train = generate_SPY_dataframe(decrement_year(year)).copy()
     test = df.copy()
-    # test_arima(train, test, df, date=date)
+    SVR(train, test)
+
+    test_arima(train, test, df, date=date)
+
+
 
     # Plot strategies
     visualise(df, ticks=strats) # ticks for which strategy
@@ -101,12 +110,13 @@ def graph(year, date=238):
     visualise_returns(df, strats=strats) # change to fig2 once working
     visualise_MACD(df)
     visualise_RSI(df)
-    # print_statistics(df)
-    # prepare_df(df)
+    print_statistics(df)
+    prepare_df(df)
+    print(df.columns)
+    df.to_csv('dataframe.csv')
     # do_ml(df)
     # year = increment_year(year)
     # plt.show()
-    #
 
 
 if __name__ == '__main__':

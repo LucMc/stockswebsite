@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import svm, neighbors
 from sklearn.ensemble import VotingClassifier, RandomForestClassifier
-
 '''
 Train on the last year then test on the next.
 '''
@@ -13,8 +12,10 @@ Train on the last year then test on the next.
 def prepare_df(df, ml='SVM'):
     hm_days = 7
     for i in range(1, hm_days+1):
+        # Percentage change
         df[f'delta {i}d'] = (df['Adj Close'].shift(-i) - df['Adj Close']) / df['Adj Close']
-    # print(df)
+
+    df['delta'] = df['delta 1d'].shift(1)
     return df
 
 def buy_sell_hold(*args):

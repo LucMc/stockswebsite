@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np
 
 # Lower threshold to increase volume
-SELL_THRESHOLD = 56
-BUY_THRESHOLD = 54
+SELL_THRESHOLD = 50 # 56
+BUY_THRESHOLD = 50 # 54
 
 def buy_sell(df):
     orders = []

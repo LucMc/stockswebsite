@@ -69,14 +69,15 @@ def visualise_returns(df, strats=[]):
 
     )
 
-    df['delta Adj Close'] = df['Adj Close'] - df['Adj Close'][0]
+    df['bh Adj Close'] = df['Adj Close'] - df['Adj Close'][0]
+
     l = [f'{s} cumulative return' for s in strats]
-    l.append('delta Adj Close')
+    l.append('bh Adj Close')
 
     cm = itertools.cycle(palette)
 
     for col, colour in zip(l, cm):
-        if col == 'delta Adj Close':
+        if col == 'bh Adj Close':
             p.line(df.index, df[col], color=colour, legend_label=col, alpha=0.8)
         else:
             p.line(df.index, df[col], color=colour, legend_label=col, line_width=4, alpha=0.8)
