@@ -1,1 +1,1 @@
-print('EMPTY FILE')
+print('NONE')
