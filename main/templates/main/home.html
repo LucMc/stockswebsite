@@ -63,6 +63,8 @@
   <input class="form-check-input graphswitch" type="checkbox" id="MACDcheckbox" />MACD<br>
   <input class="form-check-input graphswitch" type="checkbox" id="RSIcheckbox" />RSI<br>
   <input class="form-check-input graphswitch" type="checkbox" id="ARIMAcheckbox" />ARIMA<br>
+    <input class="form-check-input graphswitch" type="checkbox" id="NNcheckbox" />NN<br>
+
 
   <label class="form-check-label" for="flexSwitchCheckDefault"></label>
 </div>
@@ -91,9 +93,18 @@
          <input type="range" min="1" max="238" value="237" style="width:90%; text-align:center;" id="date" name="date">
 
          <input type="submit"value="Show"/>
-       </form>
 
       </div>
+
+      <div id="NN">
+      {{NN}}
+
+         <input type="range" min="1" max="238" value="237" style="width:90%; text-align:center;" id="date" name="date">
+
+         <input type="submit"value="Show"/>
+
+      </div>
+       </form>
 
   {% endautoescape %}
   </th>

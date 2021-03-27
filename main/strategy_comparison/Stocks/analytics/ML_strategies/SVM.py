@@ -16,6 +16,7 @@ def prepare_df(df, ml='SVM'):
         df[f'delta {i}d'] = (df['Adj Close'].shift(-i) - df['Adj Close']) / df['Adj Close']
 
     df['delta'] = df['delta 1d'].shift(1)
+    df['delta'].fillna(0, inplace=True)
     return df
 
 def buy_sell_hold(*args):

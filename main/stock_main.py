@@ -24,103 +24,76 @@ Get seperate dataframes for different things since the main one is getting a bit
 '''
 import pandas as pd
 import datetime as dt
-import pandas_datareader.data as web
-from .strategy_comparison.Stocks.analytics.non_ML_strategies.MACD import MACD
-from .strategy_comparison.Stocks.analytics.non_ML_strategies.RSI import RSI
-from .strategy_comparison.Stocks.analytics.non_ML_strategies.MACDRSI import MACDRSI
+
 # from machine_learning import machine_learning
-from .strategy_comparison.Stocks.analytics.ML_strategies.SVM import *
 from .strategy_comparison.Stocks.analytics.ML_strategies.ARIMA import *
 from .strategy_comparison.Stocks.analytics.strategy_statistics import *
 from .strategy_comparison.Stocks.analytics.visualise import *
 
 from .strategy_comparison.Stocks.analytics.ML_strategies.SVR import *
-from .strategy_comparison.Stocks.analytics.ML_strategies.NN import *
+from .strategy_comparison.Stocks.analytics.ML_strategies.NN import visualise_nn
+from .generate_dataframe import *
 
-
+strats = ['MACD', 'RSI', 'MACDRSI']
 
 pd.set_option('display.max_columns', None)  # Helps for printing columns
 # pd.set_option('display.max_rows', None)  # Helps for printing rows
 '''
 Next might want to plot the cumulative return and some statistics of the strategies.
 '''
-def increment_year(end):
-    try:
-        start = end.replace(year=end.year + 1) # Leap year might cause issues
-    except ValueError:
-        start = end.replace(year=end.year + 1, day=end.day-1)
-    return start
 
-def decrement_year(end):
-    try:
-        start = end.replace(year=end.year - 1) # Leap year might cause issues
-    except ValueError:
-        start = end.replace(year=end.year - 1, day=end.day-1)
-    return start
 
-def generate_SPY_dataframe(start):
-    '''
-    Gather the last years worth of daily ticker data into a dataframe
-    '''
-    print('- - ' * 15)
-    print(f'Generating Data from {start.year}')
-    print('- - ' * 15)
+# def generate_training_data(df):
+#     year = 2021
+#     # year = dt.datetime(year, 1, 1)
+#     years = [decrement_year(dt.datetime(year, 1, 1)) for year in range(2020, 2000, -1)]
+#     print(years)
+#     train = df.copy()
+#     for year in years:
+#         train = pd.concat([train,
+#                        generate_IBM_dataframe(year)]).copy()
+#     return train
 
-    end = increment_year(start)
-    df = web.DataReader('IBM', 'yahoo', start, end)
-    return df
 
 def graph(year, date=238):
-    # Variables
-    strats = ['MACD', 'RSI', 'MACDRSI']
     year = dt.datetime(year, 1, 1)
 
-    # Generate dataframe
-    df = generate_SPY_dataframe(year)
-
-    # Drop columns not in use
-    df.drop(['Open', 'High', 'Low', 'Close', 'Volume'], axis=1, inplace=True)
-
-    # Non Machine Learning
-    df = MACD(df)
-    df = RSI(df)
-    df = MACDRSI(df)
+    df = generate_df(year).copy()
     # print(df)
 
     # Machine Learning
-    # Remove unwanted labels before machine learning
     # df = machine_learning(df)
 
     # Reduce training data for now
-    # train = pd.concat([generate_SPY_dataframe(decrement_year(decrement_year(year))),
-    #                    (generate_SPY_dataframe(decrement_year(year)))]).copy()
+    # train = pd.concat([generate_IBM_dataframe(decrement_year(decrement_year(year))),
+    #                    (generate_IBM_dataframe(decrement_year(year)))]).copy()
 
-    train = generate_SPY_dataframe(decrement_year(year)).copy()
+    train = generate_IBM_dataframe(decrement_year(year)).copy()
     test = df.copy()
     SVR(train, test)
 
     test_arima(train, test, df, date=date)
-
+    visualise_nn(df, date)
 
 
     # Plot strategies
     visualise(df, ticks=strats) # ticks for which strategy
-    cumulative_returns(df, strats=strats)
     # print(df[['MACD (buy/sell)', 'MACD cumulative return']])
     visualise_returns(df, strats=strats) # change to fig2 once working
     visualise_MACD(df)
     visualise_RSI(df)
     print_statistics(df)
     prepare_df(df)
-    print(df.columns)
-    df.to_csv('dataframe.csv')
+    # train = generate_training_data(df)
+
+    # print(df.columns)
+    # df.to_csv('dataframe.csv')
+    return df
     # do_ml(df)
     # year = increment_year(year)
     # plt.show()
 
 
-if __name__ == '__main__':
-    graph()
 
 
 '''

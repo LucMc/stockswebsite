@@ -23,9 +23,12 @@ def stock_plot(request):
     RSI_fig = open("main/graphs/RSI.html", 'r').read()
 
     ARIMA_fig = open("main/graphs/ARIMA.html", 'r').read()
+    NN_fig = open("main/graphs/NN.html", 'r').read()
+
 
     return render(request, 'main/home.html', context={'graph': graph_fig, 'returns':returns_fig,
                                                       'MACD':MACD_fig, 'RSI':RSI_fig,
-                                                      'ARIMA': ARIMA_fig
-                                                       })
+                                                      'ARIMA': ARIMA_fig,
+                                                      'NN': NN_fig
+                                                      })
 

@@ -131,5 +131,5 @@ USE_L10N = True
 USE_TZ = True
 
 
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())

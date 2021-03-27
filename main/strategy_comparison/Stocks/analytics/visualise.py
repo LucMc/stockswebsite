@@ -128,6 +128,8 @@ def visualise_RSI(df):
 
     save(p, filename="main/graphs/RSI.html")
     return p
+
+
 '''
     # 2 - Graph of MACD indicator
     ax2.plot(df.index, MACD, label='MACD Line', color='red', linewidth=2)
