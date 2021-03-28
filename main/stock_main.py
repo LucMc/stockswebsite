@@ -57,7 +57,6 @@ Next might want to plot the cumulative return and some statistics of the strateg
 
 def graph(year, date=238):
     year = dt.datetime(year, 1, 1)
-
     df = generate_df(year).copy()
     # print(df)
 

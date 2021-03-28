@@ -146,7 +146,6 @@ def visualise_nn(df, date):
     print("actual:", y_test[date])
 
     # Recalculate values based on delta
-    date = 0
     print(y_test[date][0])
 
     # df = generate_df(year).copy()
@@ -155,6 +154,8 @@ def visualise_nn(df, date):
     print((y_test[date]*adjclose) + adjclose)
     predictions = (prediction*adjclose) + adjclose
     # print(predictions)
+    print(f"DATE: {date}")
+
     generate_graph(predictions, df, date)
     # return predictions
 

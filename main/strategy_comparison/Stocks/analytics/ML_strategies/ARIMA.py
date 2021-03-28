@@ -15,9 +15,9 @@ import itertools
 from pmdarima.arima.utils import ndiffs
 from pmdarima.arima import auto_arima
 
-def train_arima(train, test, i, step=14):
+def train_arima(train, test, i, step=7):
     '''Make it so it's a year plus the appended ammount until slider (done by splitting df)'''
-    step = 14
+    step = 7
 
     train = pd.concat([train, test[:i]])
     # order = get_order(train)
@@ -30,7 +30,7 @@ def train_arima(train, test, i, step=14):
     # pickle.dump(result, open("main/models/ARIMA.pickle", 'wb'))
 
 def test_arima(train, test, df, date):
-    STEP = 14
+    STEP = 7
     # result = pickle.load(open("main/models/ARIMA.pickle", 'rb'))
     # fc, se, conf = result.forecast(step)
     train.index = pd.DatetimeIndex(train.index).to_period('M')
@@ -45,7 +45,7 @@ def test_arima(train, test, df, date):
     Split the dataset into 2 week blocks to test on?
     or have a slider
     '''
-def visualise_arima(fc, df, date, step=14):
+def visualise_arima(fc, df, date, step=7):
     cm = itertools.cycle(palette)
 
     curdoc().theme = 'dark_minimal'
@@ -59,9 +59,9 @@ def visualise_arima(fc, df, date, step=14):
         height_policy='max'
     )
 
-    p.line([df.index[x-1] for x in range(date, date+step)], fc, alpha=0.35, color='orange', line_width=4)
+    p.line([df.index[x] for x in range(date, date+step)], fc, alpha=0.35, color='orange', line_width=4)
     # forecast = p.line([df.index[x-1] for x in range(i, i+step)], fcs[i], alpha=0.35, color='orange', radius=1)
-    p.line(df.index[date:date+14], df['Adj Close'][date:date+14], alpha=0.35, color=cm.__next__(), line_width=4)
+    p.line(df.index[date:date+7], df['Adj Close'][date:date+7], alpha=0.35, color=cm.__next__(), line_width=4)
 
     # create widget and link
     # slider = Slider(start=0, end=255, step=1, value=10)

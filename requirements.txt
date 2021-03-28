@@ -1,9 +1,6 @@
 
 bokeh==2.2.3
 
-django-heroku==0.3.1
-
-
 matplotlib==3.2.2
 mpl-finance==0.10.1
 
@@ -31,3 +28,4 @@ pytz==2020.1
 sqlparse==0.3.1
 statsmodels
 pmdarima
+tensorflow
