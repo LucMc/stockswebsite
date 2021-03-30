@@ -4,6 +4,9 @@ from .strategy_comparison.Stocks.analytics.non_ML_strategies.RSI import RSI
 from .strategy_comparison.Stocks.analytics.non_ML_strategies.MACDRSI import MACDRSI
 from .strategy_comparison.Stocks.analytics.ML_strategies.SVM import *
 from .strategy_comparison.Stocks.analytics.strategy_statistics import *
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+
 
 def increment_year(end):
     try:

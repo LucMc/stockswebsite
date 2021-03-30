@@ -69,7 +69,7 @@ def graph(year, date=238):
 
     train = generate_IBM_dataframe(decrement_year(year)).copy()
     test = df.copy()
-    SVR(train, test)
+    # SVR(train, test)
 
     test_arima(train, test, df, date=date)
     visualise_nn(df, date)

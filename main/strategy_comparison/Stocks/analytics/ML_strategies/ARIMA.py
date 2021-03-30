@@ -5,10 +5,9 @@ import pickle
 
 from bokeh.plotting import figure, output_file, save, show
 from bokeh.palettes import Dark2_5 as palette
-from bokeh.layouts import column
-from bokeh.models import Slider
-from bokeh.themes import built_in_themes
+
 from bokeh.io import curdoc
+from bokeh.models import DatetimeTickFormatter
 
 import itertools
 
@@ -59,15 +58,20 @@ def visualise_arima(fc, df, date, step=7):
         height_policy='max'
     )
 
-    p.line([df.index[x] for x in range(date, date+step)], fc, alpha=0.35, color='orange', line_width=4)
+    p.line([df.index[x] for x in range(date, date+step)], fc, alpha=0.35, color=cm.__next__(),
+           line_width=4, legend_label="Forecast")
     # forecast = p.line([df.index[x-1] for x in range(i, i+step)], fcs[i], alpha=0.35, color='orange', radius=1)
-    p.line(df.index[date:date+7], df['Adj Close'][date:date+7], alpha=0.35, color=cm.__next__(), line_width=4)
+    p.line(df.index[date:date+7], df['Adj Close'][date:date+7], alpha=0.35, color=cm.__next__(),
+           line_width=4, legend_label="Stock Price")
 
+    p.legend.location = "bottom_left"
+    p.legend.click_policy = "hide"
     # create widget and link
     # slider = Slider(start=0, end=255, step=1, value=10)
     # slider.js_link('value', forecast.glyph, 'radius')
     #
     # show(column(forecast, slider))
+    p.xaxis.formatter = DatetimeTickFormatter(days=["%d %b"])
 
     save(p, filename="main/graphs/ARIMA.html")
 

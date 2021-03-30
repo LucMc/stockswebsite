@@ -6,6 +6,7 @@ from bokeh.palettes import YlGn3 as buy_palette
 from bokeh.palettes import YlOrRd4 as sell_palette
 from bokeh.themes import built_in_themes
 from bokeh.io import curdoc
+from bokeh.models import DatetimeTickFormatter
 
 def percent_return(df, col):
     percent_return = (np.sum(df[f'{col} (buy/sell)']) / df['Adj Close'][0]) * 100
@@ -52,7 +53,7 @@ def visualise(df, ticks=[]):
 
     p.legend.location = "bottom_left"
     p.legend.click_policy = "hide"
-
+    p.xaxis.formatter = DatetimeTickFormatter(months=["%d %b"])
     save(p, filename="main/graphs/graph.html")
     return p
 
@@ -84,6 +85,7 @@ def visualise_returns(df, strats=[]):
 
     p.legend.location = "bottom_left"
     p.legend.click_policy = "hide"
+    p.xaxis.formatter = DatetimeTickFormatter(months=["%d %b"])
 
     save(p, filename="main/graphs/returns.html")
     return p
@@ -105,6 +107,7 @@ def visualise_MACD(df):
 
     p.line(df.index, MACD, legend_label='MACD Line', color='red', line_width=2)
     p.line(df.index, signal, legend_label='Signal Line', color='blue', line_width=2)
+    p.xaxis.formatter = DatetimeTickFormatter(months=["%d %b"])
 
     save(p, filename="main/graphs/MACD.html")
     return p
@@ -125,6 +128,7 @@ def visualise_RSI(df):
     p.line(df.index, [70]*len(df.index), color='azure', line_dash='dashed')
 
     p.line(df.index, df['RSI'], legend_label='RSI', color='mediumpurple')
+    p.xaxis.formatter = DatetimeTickFormatter(months=["%d %b"])
 
     save(p, filename="main/graphs/RSI.html")
     return p
