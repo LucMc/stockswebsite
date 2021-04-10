@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .stock_main import *
-
+import asyncio
 
 
 # Normal homepage if no year is selected
@@ -12,7 +12,8 @@ def stock_plot(request):
     if int(request.GET.get('year')) == 0:
         return render(request, 'main/home.html')
     else:
-        graph(int(request.GET.get('year')), int(request.GET.get('date')))  # make this stock figure
+        loop = asyncio.new_event_loop()
+        loop.run_until_complete(graph(int(request.GET.get('year')), int(request.GET.get('date'))))  # make this stock figure
 
     # print(int(request.GET.get('year')))
     # print("date", int(request.POST['date']))

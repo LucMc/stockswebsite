@@ -33,6 +33,7 @@ from .strategy_comparison.Stocks.analytics.visualise import *
 from .strategy_comparison.Stocks.analytics.ML_strategies.SVR import *
 from .strategy_comparison.Stocks.analytics.ML_strategies.NN import visualise_nn
 from .generate_dataframe import *
+import asyncio
 
 strats = ['MACD', 'RSI', 'MACDRSI']
 
@@ -54,10 +55,13 @@ Next might want to plot the cumulative return and some statistics of the strateg
 #                        generate_IBM_dataframe(year)]).copy()
 #     return train
 
-
-def graph(year, date=238):
+import time
+async def graph(year, date=238):
+    # Asyncio
+    start = time.time()
+    loop = asyncio.get_event_loop()
     year = dt.datetime(year, 1, 1)
-    df = generate_df(year).copy()
+    async_df = loop.create_task(generate_df(year))
     # print(df)
 
     # Machine Learning
@@ -67,11 +71,17 @@ def graph(year, date=238):
     # train = pd.concat([generate_IBM_dataframe(decrement_year(decrement_year(year))),
     #                    (generate_IBM_dataframe(decrement_year(year)))]).copy()
 
-    train = generate_IBM_dataframe(decrement_year(year)).copy()
+    async_train = loop.create_task(generate_IBM_dataframe(decrement_year(year)))
+    await asyncio.wait([async_train, async_df])
+
+    train = pd.DataFrame(async_train.result())
+
+    df = pd.DataFrame(async_df.result())
+
     test = df.copy()
     # SVR(train, test)
 
-    test_arima(train, test, df, date=date)
+    loop.create_task(test_arima(train, test, df, date=date))
     visualise_nn(df, date)
 
 
@@ -87,6 +97,9 @@ def graph(year, date=238):
 
     # print(df.columns)
     # df.to_csv('dataframe.csv')
+    end = time.time()
+    print(end - start)
+    await asyncio.wait([async_train, async_df])
     return df
     # do_ml(df)
     # year = increment_year(year)

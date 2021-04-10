@@ -27,7 +27,7 @@ def train_arima(train, test, i, step=7):
     return result.predict(step)
     # pickle.dump(result, open("main/models/ARIMA.pickle", 'wb'))
 
-def test_arima(train, test, df, date):
+async def test_arima(train, test, df, date):
     STEP = 7
     # result = pickle.load(open("main/models/ARIMA.pickle", 'rb'))
     # fc, se, conf = result.forecast(step)

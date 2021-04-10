@@ -5,6 +5,8 @@ from .strategy_comparison.Stocks.analytics.non_ML_strategies.MACDRSI import MACD
 from .strategy_comparison.Stocks.analytics.ML_strategies.SVM import *
 from .strategy_comparison.Stocks.analytics.strategy_statistics import *
 from pandas.plotting import register_matplotlib_converters
+
+import asyncio
 register_matplotlib_converters()
 
 
@@ -22,7 +24,7 @@ def decrement_year(end):
         start = end.replace(year=end.year - 1, day=end.day-1)
     return start
 
-def generate_IBM_dataframe(start):
+async def generate_IBM_dataframe(start):
     '''
     Gather the last years worth of daily ticker data into a dataframe
     '''
@@ -34,14 +36,17 @@ def generate_IBM_dataframe(start):
     df = web.DataReader('IBM', 'yahoo', start, end)
     return df
 
-def generate_df(year):
+async def generate_df(year):
     strats = ['MACD', 'RSI', 'MACDRSI']
     # Variables
     # year = dt.datetime(year, 1, 1)
 
     # Generate dataframe
-    df = generate_IBM_dataframe(year)
+    loop = asyncio.get_event_loop()
+    df = loop.create_task(generate_IBM_dataframe(year))
+    await df
 
+    df = df.result()
     # Drop columns not in use
     df.drop(['Open', 'High', 'Low', 'Close'], axis=1, inplace=True)
 

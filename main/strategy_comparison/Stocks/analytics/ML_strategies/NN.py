@@ -178,7 +178,7 @@ def NN(df=None):
     # print(pd.DataFrame(d))
     # print(df['Adj Close'].shift(-1))
 
-def visualise_nn(df, date):
+async def visualise_nn(df, date):
     # year = 2020 # this would be any given year
     # date = 130
     # year = dt.datetime(year, 1, 1)
