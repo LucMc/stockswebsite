@@ -3,13 +3,17 @@ from .stock_main import *
 
 
 
-
-# Create your views here.
+# Normal homepage if no year is selected
 def homepage(request):
     return render(request, 'main/home.html')
 
+# Stock plot
 def stock_plot(request):
-    graph(int(request.GET.get('year')), int(request.GET.get('date'))) # make this stock figure
+    if int(request.GET.get('year')) == 0:
+        return render(request, 'main/home.html')
+    else:
+        graph(int(request.GET.get('year')), int(request.GET.get('date')))  # make this stock figure
+
     # print(int(request.GET.get('year')))
     # print("date", int(request.POST['date']))
     # except Exception as e:
