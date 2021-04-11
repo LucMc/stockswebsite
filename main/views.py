@@ -9,11 +9,18 @@ def homepage(request):
 
 # Stock plot
 def stock_plot(request):
+    if request.GET.get('year') == "":
+        ticker = "IBM"
+    else:
+        ticker = request.GET.get('ticker')
+
     if int(request.GET.get('year')) == 0:
         return render(request, 'main/home.html')
     else:
         loop = asyncio.new_event_loop()
-        loop.run_until_complete(graph(int(request.GET.get('year')), int(request.GET.get('date'))))  # make this stock figure
+        loop.run_until_complete(graph(year=int(request.GET.get('year')),
+                                      date=int(request.GET.get('date')),
+                                      ticker=ticker))
 
     # print(int(request.GET.get('year')))
     # print("date", int(request.POST['date']))
@@ -34,6 +41,7 @@ def stock_plot(request):
     return render(request, 'main/home.html', context={'graph': graph_fig, 'returns':returns_fig,
                                                       'MACD':MACD_fig, 'RSI':RSI_fig,
                                                       'ARIMA': ARIMA_fig,
-                                                      'NN': NN_fig
+                                                      'NN': NN_fig,
+                                                      'ticker': ticker
                                                       })
 

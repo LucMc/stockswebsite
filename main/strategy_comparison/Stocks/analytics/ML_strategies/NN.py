@@ -78,8 +78,9 @@ def create_model(sequence_length, n_features, units=256, cell=LSTM, n_layers=2, 
 #     return model
 
 def gen_training_data(df=None, year=None):
+    ticker = "IBM"
     if year != None:
-        df = generate_df(year).copy()
+        df = generate_df(year, ticker).copy()
 
     # print(df)
     days = 7
@@ -217,7 +218,7 @@ def generate_graph(fc, df, date):
     curdoc().theme = 'dark_minimal'
     output_file('NN.html')
     p = figure(
-        title='IBM NN Learning',
+        title='LSTM Forecast',
         x_axis_label='Time (Days)',
         y_axis_label='Price ($)',
         sizing_mode='scale_width',

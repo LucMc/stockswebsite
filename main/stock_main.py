@@ -56,12 +56,12 @@ Next might want to plot the cumulative return and some statistics of the strateg
 #     return train
 
 import time
-async def graph(year, date=238):
+async def graph(year=2000, date=238, ticker="IBM"):
     # Asyncio
     start = time.time()
     loop = asyncio.get_event_loop()
     year = dt.datetime(year, 1, 1)
-    async_df = loop.create_task(generate_df(year))
+    async_df = loop.create_task(generate_df(year, ticker))
     # print(df)
 
     # Machine Learning
@@ -71,7 +71,7 @@ async def graph(year, date=238):
     # train = pd.concat([generate_IBM_dataframe(decrement_year(decrement_year(year))),
     #                    (generate_IBM_dataframe(decrement_year(year)))]).copy()
 
-    async_train = loop.create_task(generate_IBM_dataframe(decrement_year(year)))
+    async_train = loop.create_task(generate_ticker_dataframe(decrement_year(year), ticker))
     await asyncio.wait([async_train, async_df])
 
     train = pd.DataFrame(async_train.result())

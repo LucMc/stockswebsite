@@ -17,44 +17,11 @@
     height: 10%;
   }
 </style>
-<script>
-    function getQueryVariable(variable)
-{
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++)
-  {
-    var pair = vars[i].split("=");
-    if (pair[0] == variable)
-    {
-      return pair[1];
-    }
-  }
-  return -1; //not found
-}
 
-
-</script>
 </head>
 
 <body>
-<h1>Stock Analysis</h1>
 
-  <form action="/plot"  method="get" >
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <select id="year" name="year" value="2001">
-        <script>
-            for (var i = 2000; i <= 2021; i++){
-                if (i == getQueryVariable("year")){
-                    document.write('<option value="'+i+'" selected>'+i+'</option>');
-                    }
-                else {
-                    document.write('<option value="'+i+'">'+i+'</option>');
-                }
-            }
-        </script>
-    </select>
-  <input type="submit"value="Show"/>
 
 <!-- SWITCHES-->
 <div class="form-check form-switch" align="left">
@@ -72,6 +39,7 @@
 <!-- GRAPHS -->
  <table class="content">
   <th>
+      <h1>{{ticker}}</h1>
   {% autoescape off %}
 
       <div id="graph">
@@ -93,10 +61,6 @@
 
       <div id="NN">
       {{NN}}
-
-      <input type="range" min="1" max="238" value="237" style="width:90%; text-align:center;" id="date" name="date">
-      <input type="submit"value="Show"/>
-      </form>
 
       </div>
 

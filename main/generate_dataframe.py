@@ -24,26 +24,26 @@ def decrement_year(end):
         start = end.replace(year=end.year - 1, day=end.day-1)
     return start
 
-async def generate_IBM_dataframe(start):
+async def generate_ticker_dataframe(start, ticker):
     '''
     Gather the last years worth of daily ticker data into a dataframe
     '''
     print('- - ' * 15)
-    print(f'Generating Data from {start.year}')
+    print(f'Generating {ticker} from {start.year}')
     print('- - ' * 15)
 
     end = increment_year(start)
-    df = web.DataReader('IBM', 'yahoo', start, end)
+    df = web.DataReader(ticker, 'yahoo', start, end)
     return df
 
-async def generate_df(year):
+async def generate_df(year, ticker):
     strats = ['MACD', 'RSI', 'MACDRSI']
     # Variables
     # year = dt.datetime(year, 1, 1)
 
     # Generate dataframe
     loop = asyncio.get_event_loop()
-    df = loop.create_task(generate_IBM_dataframe(year))
+    df = loop.create_task(generate_ticker_dataframe(year, ticker))
     await df
 
     df = df.result()
@@ -58,7 +58,7 @@ async def generate_df(year):
 
     prepare_df(df)
 
-    # train = generate_IBM_dataframe(decrement_year(year)).copy()
+    # train = generate_ticker_dataframe(decrement_year(year)).copy()
     # test = df.copy()
     # SVR(train, test)
 

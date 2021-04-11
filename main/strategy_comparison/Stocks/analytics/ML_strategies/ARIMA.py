@@ -49,7 +49,7 @@ def visualise_arima(fc, df, date, step=7):
     curdoc().theme = 'dark_minimal'
     output_file('ARIMA.html')
     p = figure(
-        title='IBM ARIMA Learning',
+        title='ARIMA Forecast',
         x_axis_label='Time (Days)',
         y_axis_label='Price ($)',
         sizing_mode='scale_width',
