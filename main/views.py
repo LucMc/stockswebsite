@@ -9,18 +9,24 @@ def homepage(request):
 
 # Stock plot
 def stock_plot(request):
+
     if request.GET.get('year') == "":
         ticker = "IBM"
     else:
         ticker = request.GET.get('ticker')
-
-    if int(request.GET.get('year')) == 0:
+    year = int(request.GET.get('year'))
+    if  year == 0:
         return render(request, 'main/home.html')
     else:
-        loop = asyncio.new_event_loop()
-        loop.run_until_complete(graph(year=int(request.GET.get('year')),
-                                      date=int(request.GET.get('date')),
-                                      ticker=ticker))
+        try:
+            loop = asyncio.new_event_loop()
+            loop.run_until_complete(graph(year=year,
+                                          date=int(request.GET.get('date')),
+                                          ticker=ticker))
+        except KeyError:
+            return render(request, 'main/home.html', context={'ticker': f'No data for {ticker} in {year}'
+                                                              })
+
 
     # print(int(request.GET.get('year')))
     # print("date", int(request.POST['date']))
