@@ -97,9 +97,10 @@ async def graph(year=2000, date=238, ticker="IBM"):
 
     # print(df.columns)
     # df.to_csv('dataframe.csv')
+
+    await asyncio.wait([async_train, async_df])
     end = time.time()
     print(end - start)
-    await asyncio.wait([async_train, async_df])
     return df
     # do_ml(df)
     # year = increment_year(year)

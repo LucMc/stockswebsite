@@ -1,7 +1,7 @@
-# import tensorflow as tf
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout, Bidirectional
-from keras.callbacks import TensorBoard
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional, Activation
+# from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard
 # from sklearn import preprocessing
 # from sklearn.model_selection import train_test_split
 # from collections import deque
@@ -11,14 +11,15 @@ import pandas as pd
 import datetime as dt
 from main.generate_dataframe import generate_df
 
-from bokeh.plotting import figure, output_file, save, show
+from bokeh.plotting import figure, output_file, save#, show
 from bokeh.palettes import Dark2_5 as palette
 from bokeh.models import DatetimeTickFormatter
+# from bokeh.themes import built_in_themes
 from bokeh.io import curdoc
 import itertools
 
 import time
-# from tensorflow.keras.callbacks import TensorBoard
+from tensorflow.keras.callbacks import TensorBoard
 import random
 
 
