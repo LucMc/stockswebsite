@@ -82,7 +82,7 @@ async def graph(year=2000, date=238, ticker="IBM"):
     # SVR(train, test)
 
     loop.create_task(test_arima(train, test, df, date=date))
-    visualise_nn(df, date)
+    loop.create_task(visualise_nn(df, date))
 
 
     # Plot strategies
