@@ -22,5 +22,6 @@ app_name = 'main'  # here for namespacing of urls.
 urlpatterns = [
     path("", views.homepage, name="homepage"),
     path("plot", views.stock_plot, name="stock plot"),
+    path("forecast", views.forecast_plot, name="forecast"),
 
 ]

@@ -18,6 +18,13 @@
   }
 </style>
 
+
+<script>
+
+    window.onload = function() {
+       $("dateRange").show()
+    }
+</script>
 </head>
 
 <body>
@@ -26,9 +33,9 @@
 <!-- SWITCHES-->
 <div class="form-check form-switch" align="left">
   <input class="form-check-input graphswitch" type="checkbox" id="graphcheckbox" checked /> graph<br>
-  <input class="form-check-input graphswitch" type="checkbox" id="returnscheckbox" checked/>returns<br>
-  <input class="form-check-input graphswitch" type="checkbox" id="MACDcheckbox" />MACD<br>
-  <input class="form-check-input graphswitch" type="checkbox" id="RSIcheckbox" />RSI<br>
+
+  <input class="form-check-input graphswitch" type="checkbox" id="ARIMAcheckbox" />ARIMA<br>
+  <input class="form-check-input graphswitch" type="checkbox" id="NNcheckbox" />NN<br>
 
 
   <label class="form-check-label" for="flexSwitchCheckDefault"></label>
@@ -43,15 +50,15 @@
       <div id="graph">
       {{graph}}
       </div>
-      <div id="returns">
-      {{returns}}
+
+      </div>
+      <div id="ARIMA">
+      {{ARIMA}}
       </div>
 
-      <div id="MACD">
-      {{MACD}}
-      </div>
-      <div id="RSI">
-      {{RSI}}
+      <div id="NN">
+      {{NN}}
+
       </div>
 
   {% endautoescape %}

@@ -9,30 +9,25 @@ def homepage(request):
 
 # Stock plot
 def stock_plot(request):
-
-    if request.GET.get('year') == "":
-        ticker = "IBM"
-    else:
-        ticker = request.GET.get('ticker')
-    year = int(request.GET.get('year'))
-    if  year == 0:
-        return render(request, 'main/home.html')
+    if not list(request.GET.items()):
+        # Set default values
+        year = 2000
+        ticker = 'IBM'
+        date = 100
     else:
         try:
-            loop = asyncio.new_event_loop()
-            loop.run_until_complete(graph(year=year,
-                                          date=int(request.GET.get('date')),
-                                          ticker=ticker))
-        except KeyError:
-            return render(request, 'main/home.html', context={'ticker': f'No data for {ticker} in {year}'
-                                                              })
-
-
-    # print(int(request.GET.get('year')))
-    # print("date", int(request.POST['date']))
-    # except Exception as e:
-    #     print("ERROR", e)
-    #     graph(2000) # make this stock figure
+            ticker = request.GET.get('ticker')
+            year = int(request.GET.get('year'))
+            date = int(request.GET.get('date'))
+        except:
+            return render(request, 'main/home.html', context={'ticker' : 'An Error has occured please reenter information'})
+    try:
+        loop = asyncio.new_event_loop()
+        loop.run_until_complete(indicators_graph(year=year,
+                                      date=date,
+                                      ticker=ticker))
+    except KeyError:
+        return render(request, 'main/home.html', context={'ticker': f'No data for {ticker} in {year}'})
 
     graph_fig = open("main/graphs/graph.html", 'r').read()
     returns_fig = open("main/graphs/returns.html", 'r').read()
@@ -40,14 +35,48 @@ def stock_plot(request):
     MACD_fig = open("main/graphs/MACD.html", 'r').read()
     RSI_fig = open("main/graphs/RSI.html", 'r').read()
 
-    ARIMA_fig = open("main/graphs/ARIMA.html", 'r').read()
-    NN_fig = open("main/graphs/NN.html", 'r').read()
 
 
     return render(request, 'main/home.html', context={'graph': graph_fig, 'returns':returns_fig,
                                                       'MACD':MACD_fig, 'RSI':RSI_fig,
+                                                      'ticker': ticker
+                                                      })
+
+
+# Machine Learning Forecasts
+def forecast_plot(request):
+    if not list(request.GET.items()):
+        # Set default values
+        year = 2000
+        ticker = 'IBM'
+        date = 100
+    else:
+        try:
+            ticker = request.GET.get('ticker')
+            year = int(request.GET.get('year'))
+            date = int(request.GET.get('date'))
+        except:
+            return render(request, 'main/forecast.html', context={'ticker' : 'An Error has occured please reenter information'})
+    try:
+        loop = asyncio.new_event_loop()
+        loop.run_until_complete(forecast_graph(year=year,
+                                      date=date,
+                                      ticker=ticker))
+    except KeyError:
+        return render(request, 'main/forecast.html', context={'ticker': f'No data for {ticker} in {year}'})
+
+    graph_fig = open("main/graphs/graph.html", 'r').read()
+    # returns_fig = open("main/graphs/returns.html", 'r').read()
+
+    # MACD_fig = open("main/graphs/MACD.html", 'r').read()
+    # RSI_fig = open("main/graphs/RSI.html", 'r').read()
+
+    ARIMA_fig = open("main/graphs/ARIMA.html", 'r').read()
+    NN_fig = open("main/graphs/NN.html", 'r').read()
+
+
+    return render(request, 'main/forecast.html', context={'graph': graph_fig,
                                                       'ARIMA': ARIMA_fig,
                                                       'NN': NN_fig,
                                                       'ticker': ticker
                                                       })
-
