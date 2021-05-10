@@ -1,5 +1,7 @@
       $(document).ready(function(){
-        graphs = ["MACD", "RSI", "graph", "returns", "ARIMA", "NN"]
+       document.getElementById("navForm").outerHTML=document.getElementById("navForm").outerHTML.replace('forecast', getURL());
+       $("#dateRange").hide()
+        graphs = ["MACD", "RSI", "graph", "returns", "ARIMA", "NN", "LSTM"]
         giveSwitchesOnclick(graphs);
 
         graphs.forEach(graph => {
@@ -24,3 +26,10 @@
               });
             }
             });
+    // Functions to replace the search button with relevent address for GET
+    function getURL()
+    {
+        url = window.location.href;
+        url = url.split('/')
+        return url[url.length-1];
+    }

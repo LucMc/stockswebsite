@@ -18,6 +18,12 @@
   }
 </style>
 
+<script>
+  $(document).ready(function(){
+    document.getElementById("ticker").outerHTML=document.getElementById("ticker").outerHTML.replace('enter ticker', "{{ ticker }}")});
+
+</script>
+
 </head>
 
 <body>

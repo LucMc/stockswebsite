@@ -7,6 +7,9 @@ from .strategy_comparison.Stocks.analytics.strategy_statistics import *
 from pandas.plotting import register_matplotlib_converters
 
 import asyncio
+from .strategy_comparison.Stocks.analytics.ML_strategies.NNclassifier import visualise_classifier_nn
+from .strategy_comparison.Stocks.analytics.ML_strategies.SVR import *
+
 register_matplotlib_converters()
 
 
@@ -33,11 +36,11 @@ async def generate_ticker_dataframe(start, ticker):
     print('- - ' * 15)
 
     end = increment_year(start)
-    df = web.DataReader(ticker, 'yahoo', start, end)
+    df = web.DataReader(ticker, 'yahoo', start, end)[1:]
     return df
 
 async def generate_df(year, ticker):
-    strats = ['MACD', 'RSI', 'MACDRSI']
+    strats = ['MACD', 'RSI', 'MACDRSI', 'LSTM']
     # Variables
     # year = dt.datetime(year, 1, 1)
 
@@ -54,9 +57,10 @@ async def generate_df(year, ticker):
     df = MACD(df)
     df = RSI(df)
     df = MACDRSI(df)
-    cumulative_returns(df, strats=strats)
-
     prepare_df(df)
+    df = visualise_classifier_nn(df, gen_graph=False)
+    # print(df)
+    cumulative_returns(df, strats=strats)
 
     # train = generate_ticker_dataframe(decrement_year(year)).copy()
     # test = df.copy()

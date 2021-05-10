@@ -22,8 +22,10 @@
 <script>
 
     window.onload = function() {
-       $("dateRange").show()
-    }
+       $("#dateRange").show();
+        document.getElementById("ticker").outerHTML=document.getElementById("ticker").outerHTML.replace('enter ticker', "{{ ticker }}")};
+
+</script>
 </script>
 </head>
 
@@ -35,7 +37,7 @@
   <input class="form-check-input graphswitch" type="checkbox" id="graphcheckbox" checked /> graph<br>
 
   <input class="form-check-input graphswitch" type="checkbox" id="ARIMAcheckbox" />ARIMA<br>
-  <input class="form-check-input graphswitch" type="checkbox" id="NNcheckbox" />NN<br>
+  <input class="form-check-input graphswitch" type="checkbox" id="NNcheckbox" />LSTM<br>
 
 
   <label class="form-check-label" for="flexSwitchCheckDefault"></label>

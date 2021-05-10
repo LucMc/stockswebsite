@@ -32,10 +32,12 @@ from .strategy_comparison.Stocks.analytics.visualise import *
 
 from .strategy_comparison.Stocks.analytics.ML_strategies.SVR import *
 from .strategy_comparison.Stocks.analytics.ML_strategies.NN import visualise_nn
+from .strategy_comparison.Stocks.analytics.ML_strategies.NNclassifier import visualise_classifier_nn
+
 from .generate_dataframe import *
 import asyncio
 
-strats = ['MACD', 'RSI', 'MACDRSI']
+strats = ['MACD', 'RSI', 'MACDRSI', 'LSTM']
 
 pd.set_option('display.max_columns', None)  # Helps for printing columns
 # pd.set_option('display.max_rows', None)  # Helps for printing rows
@@ -55,10 +57,8 @@ Next might want to plot the cumulative return and some statistics of the strateg
 #                        generate_IBM_dataframe(year)]).copy()
 #     return train
 
-import time
 async def indicators_graph(year=2000, date=238, ticker="IBM"):
     # Asyncio
-    start = time.time()
     loop = asyncio.get_event_loop()
     year = dt.datetime(year, 1, 1)
     async_df = loop.create_task(generate_df(year, ticker))
@@ -87,6 +87,8 @@ async def indicators_graph(year=2000, date=238, ticker="IBM"):
 
 
     # Plot strategies
+    visualise_classifier_nn(df)
+
     visualise(df, ticks=strats) # ticks for which strategy
     # print(df[['MACD (buy/sell)', 'MACD cumulative return']])
     visualise_returns(df, strats=strats) # change to fig2 once working
@@ -98,14 +100,12 @@ async def indicators_graph(year=2000, date=238, ticker="IBM"):
 
     # print(df.columns)
     # df.to_csv('dataframe.csv')
-    end = time.time()
-    print(end - start)
+
     # await asyncio.wait([async_train, async_df, nn])
     return df
 
 async def forecast_graph(year=2000, date=238, ticker="IBM"):
     # Asyncio
-    start = time.time()
     loop = asyncio.get_event_loop()
     year = dt.datetime(year, 1, 1)
     async_df = loop.create_task(generate_df(year, ticker))

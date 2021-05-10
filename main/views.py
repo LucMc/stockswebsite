@@ -26,7 +26,9 @@ def stock_plot(request):
         loop.run_until_complete(indicators_graph(year=year,
                                       date=date,
                                       ticker=ticker))
-    except KeyError:
+
+
+    except Exception as e:
         return render(request, 'main/home.html', context={'ticker': f'No data for {ticker} in {year}'})
 
     graph_fig = open("main/graphs/graph.html", 'r').read()
