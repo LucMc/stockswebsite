@@ -49,7 +49,7 @@ def visualise(df, ticks=[]):
         p.scatter(df.index, sells, color=sell_colour, legend_label=f'{tick} Sell', marker='v', alpha=1, size=10)
 
     # 1 - Graph of Adj Close price
-    p.line(df.index, df['Adj Close'], alpha=0.35)
+    p.line(df.index, df['Adj Close'], alpha=0.35, line_width=3)
 
     p.legend.location = "bottom_left"
     p.legend.click_policy = "hide"
