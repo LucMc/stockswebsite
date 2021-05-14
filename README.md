@@ -1,4 +1,13 @@
 # Falco Stcok Analysis
+Code submitted in partial fulfilment of the requirements for the award of Batchelor in Computer Science.
+
+
+### Requirements
+ - Python 3.8
+ - Windows 10
+
+This code was ran and tested for Windows. It should work on MAC and Linux however one may need to install requirements.
+
 
 ### Installation
 To install type the `pip install -r requirements.txt` whilst in the stockswebsite directory.
