@@ -1,7 +1,4 @@
 import pandas as pd
-from statsmodels.tsa.arima_model import ARIMA
-from sklearn.metrics import mean_squared_error
-
 from bokeh.plotting import figure, output_file, save, show
 from bokeh.palettes import Dark2_5 as palette
 
@@ -9,8 +6,6 @@ from bokeh.io import curdoc
 from bokeh.models import DatetimeTickFormatter
 
 import itertools
-
-from pmdarima.arima.utils import ndiffs
 from pmdarima.arima import auto_arima
 
 def train_arima(train, test, i, step=7):

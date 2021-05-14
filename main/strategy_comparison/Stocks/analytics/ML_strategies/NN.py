@@ -16,6 +16,7 @@ import itertools
 import time
 from tensorflow.keras.callbacks import TensorBoard
 import random
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 
 
@@ -195,7 +196,7 @@ async def visualise_nn(df, date):
     # df = generate_df(year).copy()
     print("actual:", y_test[date])
     adjclose = df['Adj Close'].loc[df["delta 1d"] == y_test[date][0]].values
-    print((y_test[date]*adjclose) + adjclose)
+    # print((y_test[date]*adjclose) + adjclose)
     predictions = (prediction*adjclose) + adjclose
     # print(predictions)
 
