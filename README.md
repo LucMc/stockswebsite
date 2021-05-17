@@ -18,3 +18,9 @@ To run the code use `python3 manage.py runserver`
 ### Usage
 Type in the ticker for the security you would like to assess in the top right, select a year of inquiry and then Search.
 The program can take a number of seconds to generate the required graphs before serving the visualisation.
+
+Note the tickers should be entered as found on 
+https://uk.finance.yahoo.com/quote/GBPUSD=X/
+
+For the hosted webapp visit:
+https://falco-stock.herokuapp.com

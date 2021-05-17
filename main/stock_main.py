@@ -87,14 +87,14 @@ async def indicators_graph(year=2000, date=238, ticker="IBM"):
 
 
     # Plot strategies
-    visualise_classifier_nn(df)
+    # visualise_classifier_nn(df)
 
     visualise(df, ticks=strats) # ticks for which strategy
     # print(df[['MACD (buy/sell)', 'MACD cumulative return']])
     visualise_returns(df, strats=strats) # change to fig2 once working
     visualise_MACD(df)
     visualise_RSI(df)
-    print_statistics(df)
+    # print_statistics(df)
     prepare_df(df)
     # train = generate_training_data(df)
 
