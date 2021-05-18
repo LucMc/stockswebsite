@@ -1,6 +1,8 @@
 # Falco Stcok Analysis
 Code submitted in partial fulfilment of the requirements for the award of Batchelor in Computer Science.
 
+The majority of the code can be found in `stockswebsite/main/strategy_comparison/Stocks/analytics`
+
 
 ### Requirements
  - Python 3.8

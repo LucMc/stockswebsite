@@ -23,14 +23,12 @@ def buy_hold_sell(predictions, df):
     # 0 sell 1 buy 2 hold
     orders = [-df['Adj Close'][0]]
     flag = 1
-    for i, pred in enumerate(predictions[1:-1]):
-        # i + 1 because of predictions starting from 1
-        # print(pred)
-        # price will increase tommorow
-        if pred > 0 and flag == 0:
+    for i, pred in enumerate(predictions[1:-1]): # pred is mean of next 7 days
+
+        if pred > 0 and flag == 0: # buy if forecast mean increase in price
             orders.append(-df['Adj Close'][i+1])
             flag = 1
-        elif flag == 1 and pred < 0:
+        elif flag == 1 and pred < 0: # sell if forecast mean increase in price
             orders.append(df['Adj Close'][i+1])
             flag = 0
         else:
