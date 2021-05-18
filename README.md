@@ -24,8 +24,21 @@ The program can take a number of seconds to generate the required graphs before 
 Note the tickers should be entered as found on 
 https://uk.finance.yahoo.com/quote/GBPUSD=X/
 
-For the docker image please find instructions (not recommended):
+For the docker image please find instructions:
 https://docs.docker.com/language/nodejs/run-containers/
+
+1. Navigate into the stockswebsite folder where the Dockerfile is located
+
+2. `docker build --tag falco:latest .`
+   
+3. `docker images`
+   Find your image id
+   
+4. `docker run --name falco -d -p 8000:8000 <input image id here>`
+
+5. go to your internet browser and visit `localhost:8000`
+
+
 
 For the hosted webapp visit (not recommended):
 https://falco-stock.herokuapp.com
