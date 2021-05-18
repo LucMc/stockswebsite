@@ -24,5 +24,8 @@ The program can take a number of seconds to generate the required graphs before 
 Note the tickers should be entered as found on 
 https://uk.finance.yahoo.com/quote/GBPUSD=X/
 
-For the hosted webapp visit:
+For the docker image please find instructions (not recommended):
+https://docs.docker.com/language/nodejs/run-containers/
+
+For the hosted webapp visit (not recommended):
 https://falco-stock.herokuapp.com
