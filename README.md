@@ -8,7 +8,7 @@ The majority of the code can be found in `stockswebsite/main/strategy_comparison
  - Python 3.8
  - Windows 10
 
-This code was ran and tested for Windows. It should work on MAC and Linux however one may need to install requirements.
+This code was ran and tested for Windows. It should work on MAC (not on x86 architecture) and Linux however one may need to install requirements.
 
 
 ### Installation
@@ -34,7 +34,7 @@ https://docs.docker.com/language/nodejs/run-containers/
 3. `docker images`
    Find your image id
    
-4. `docker run --name falco -d -p 8000:8000 <input image id here>`
+4. `docker run --name falco -d -p 8000:8000 [input image id here]`
 
 5. go to your internet browser and visit `localhost:8000`
 

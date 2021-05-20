@@ -1,6 +1,5 @@
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional
+from keras.models import Sequential
+from keras.layers import LSTM, Dense, Dropout, Bidirectional
 
 import numpy as np
 import pandas as pd
@@ -12,11 +11,11 @@ from bokeh.palettes import Dark2_5 as palette
 from bokeh.models import DatetimeTickFormatter
 from bokeh.io import curdoc
 import itertools
-
+import keras
 import time
-from tensorflow.keras.callbacks import TensorBoard
+from keras.callbacks import TensorBoard
 import random
-tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+# tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 
 
@@ -185,7 +184,7 @@ async def visualise_nn(df, date):
     test = test.reshape(-1, 4, 4)
 
     # print(y_test)
-    model = tf.keras.models.load_model("main/models/LSTM.model")
+    model = keras.models.load_model("main/models/LSTM.model")
     prediction = model.predict(test)
     print("Prediction:", prediction)
     print("actual:", y_test[date])

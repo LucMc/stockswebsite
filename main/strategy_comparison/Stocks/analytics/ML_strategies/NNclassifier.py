@@ -1,4 +1,4 @@
-import tensorflow as tf
+import keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional
 
@@ -49,7 +49,7 @@ def visualise_classifier_nn(df, gen_graph=True):
     # model = tf.keras.models.load_model("../../../../../main/models/oldLSTM.model")
 
     # model = tf.keras.models.load_model("main/models/NEWLSTM-32-2-0.3.model")
-    model = tf.keras.models.load_model("main/models/LSTM.model")
+    model = keras.models.load_model("main/models/LSTM.model")
 
     df.drop(df.index[-7:0], inplace=True)
     # df['RSI'] /= 100
